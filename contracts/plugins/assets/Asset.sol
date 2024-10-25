@@ -46,7 +46,7 @@ contract Asset is IAsset {
 
     /// Can return 0, can revert
     /// @return {UoA/tok} The current price()
-    function strictPrice() public view virtual returns (uint192) {
+    function strictPrice() public view virtual override(IAsset) returns (uint192) {
         return chainlinkFeed.price(oracleTimeout);
     }
 
@@ -78,7 +78,7 @@ contract Asset is IAsset {
 
     /// Claim rewards earned by holding a balance of the ERC20 token
     /// @dev Use delegatecall
-    function claimRewards() external virtual {}
+    function claimRewards() external virtual override {}
 
     // solhint-enable no-empty-blocks
 }

@@ -222,10 +222,10 @@ contract UniswapV3Wrapper is IUniswapV3Wrapper, RewardSplitter, ReentrancyGuard 
         liquidity = uint128(
             10**Math.max(IERC20Metadata(token0).decimals(), IERC20Metadata(token1).decimals())
         );
-        (uint160 sqrtRatioX96, int24 tick, , , , , ) = pool.slot0();
+        (uint160 sqrtRatioX96, int24 _tick, , , , , ) = pool.slot0();
         (, , , , , int24 tickLower, int24 tickUpper, , , , , ) = nonfungiblePositionManager
             .positions(tokenId);
-        if (tick < tickLower) {
+        if (_tick < tickLower) {
             // current tick is below the passed range; liquidity can only become in range by crossing from left to
             // right, when we'll need _more_ token0 (it's becoming more valuable) so user must provide it
             amount0 = uint256(
@@ -237,7 +237,7 @@ contract UniswapV3Wrapper is IUniswapV3Wrapper, RewardSplitter, ReentrancyGuard 
                 )
             );
             amount1 = 0;
-        } else if (tick < tickUpper) {
+        } else if (_tick < tickUpper) {
             amount0 = uint256(
                 SqrtPriceMathPartial.getAmount0Delta(
                     sqrtRatioX96,
@@ -331,7 +331,7 @@ contract UniswapV3Wrapper is IUniswapV3Wrapper, RewardSplitter, ReentrancyGuard 
     }
 
     function tick() external view returns (int24){
-        (, int24 tick, , , , , ) = pool.slot0();
-        return tick;
+        (, int24 _tick, , , , , ) = pool.slot0();
+        return _tick;
     }
 }

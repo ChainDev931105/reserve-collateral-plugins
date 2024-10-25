@@ -71,7 +71,7 @@ contract ATokenFiatCollateral is Collateral {
     }
 
     /// @return {UoA/tok} Our best guess at the market price of 1 whole token in UoA
-    function strictPrice() public view virtual override returns (uint192) {
+    function strictPrice() public view virtual override(Asset, IAsset) returns (uint192) {
         // {UoA/tok} = {UoA/ref} * {ref/tok}
         return chainlinkFeed.price(oracleTimeout).mul(refPerTok());
     }
@@ -121,7 +121,7 @@ contract ATokenFiatCollateral is Collateral {
 
     /// Claim rewards earned by holding a balance of the ERC20 token
     /// @dev Use delegatecall
-    function claimRewards() external virtual override {
+    function claimRewards() external virtual override(Asset, IRewardable) {
         IERC20 stkAAVE = IStaticAToken(address(erc20)).REWARD_TOKEN();
         uint256 oldBal = stkAAVE.balanceOf(address(this));
         IStaticAToken(address(erc20)).claimRewardsToSelf(true);

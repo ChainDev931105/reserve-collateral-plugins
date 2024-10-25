@@ -67,7 +67,7 @@ abstract contract UniswapV2AbstractCollateral is Collateral {
     }
 
     // supply never zero on uniswap v2, so can revert only if feeds revert
-    function strictPrice() external view override returns (uint192) {
+    function strictPrice() public view override(Asset, IAsset) returns (uint192) {
         IUniswapV2Pair pair = IUniswapV2Pair(address(erc20));
         (uint112 reserve0, uint112 reserve1, ) = pair.getReserves();
         return

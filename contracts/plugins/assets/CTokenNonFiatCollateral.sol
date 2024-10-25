@@ -72,7 +72,7 @@ contract CTokenNonFiatCollateral is Collateral {
     }
 
     /// @return {UoA/tok} Our best guess at the market price of 1 whole token in UoA
-    function strictPrice() public view virtual override returns (uint192) {
+    function strictPrice() public view virtual override(Asset, IAsset) returns (uint192) {
         // {UoA/tok} = {UoA/target} * {target/ref} * {ref/tok}
         return
             targetUnitChainlinkFeed
@@ -145,7 +145,7 @@ contract CTokenNonFiatCollateral is Collateral {
 
     /// Claim rewards earned by holding a balance of the ERC20 token
     /// @dev delegatecall
-    function claimRewards() external virtual override {
+    function claimRewards() external virtual override(Asset, IRewardable) {
         IERC20 comp = IERC20(comptroller.getCompAddress());
         uint256 oldBal = comp.balanceOf(address(this));
         comptroller.claimComp(address(this));

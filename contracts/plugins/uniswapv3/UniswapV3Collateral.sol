@@ -62,7 +62,7 @@ abstract contract UniswapV3Collateral is Collateral {
         underlyingERC20Decimals1 = IERC20Metadata(underlyingAsset1).decimals();
     }
 
-    function claimRewards() external override {
+    function claimRewards() external override(Asset, IRewardable) {
         (address token0, address token1, uint256 amount0, uint256 amount1) = IUniswapV3Wrapper(
             address(erc20)
         ).claimRewards(msg.sender);
@@ -75,7 +75,7 @@ abstract contract UniswapV3Collateral is Collateral {
     }
 
     /// @return {UoA/tok} Total price in UoA of all assets obtainable by burning all liquidity in 1 whole token
-    function strictPrice() external view override returns (uint192) {
+    function strictPrice() public view override(Asset, IAsset) returns (uint192) {
         (uint256 amount0, uint256 amount1) = IUniswapV3Wrapper(address(erc20)).principal();
         //TODO use imaginary price for 0 liquidity, not fallback price , don't commit this TODO
         (uint192 price0, uint192 price1) = _priceFeeds();
