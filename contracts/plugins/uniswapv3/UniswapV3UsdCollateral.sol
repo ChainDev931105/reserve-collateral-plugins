@@ -6,7 +6,7 @@ import "@uniswap/v3-core/contracts/libraries/TickMath.sol";
 
 import "@openzeppelin/contracts/utils/math/Math.sol";
 
-import "contracts/libraries/Fixed.sol";
+import "../../libraries/Fixed.sol";
 
 import "./IUniswapV3Wrapper.sol";
 import "./UniswapV3Collateral.sol";

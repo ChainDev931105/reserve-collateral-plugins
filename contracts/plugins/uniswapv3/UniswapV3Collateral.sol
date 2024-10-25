@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 
 import "../assets/AbstractCollateral.sol";
 import "./IUniswapV3Wrapper.sol";
-import "contracts/libraries/Fixed.sol";
+import "../../libraries/Fixed.sol";
 
 /**
     @title Uniswap V3 Collateral
