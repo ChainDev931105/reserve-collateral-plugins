@@ -6,7 +6,6 @@ pragma solidity ^0.8.19;
 import "./UniswapV2AbstractCollateral.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
-import "hardhat/console.sol";
 
 
 contract UniswapV2FiatCollateral is UniswapV2AbstractCollateral {
@@ -49,9 +48,6 @@ contract UniswapV2FiatCollateral is UniswapV2AbstractCollateral {
         (uint112 reserve0, uint112 reserve1, ) = pair.getReserves();
         uint256 p = FIX_ONE * 10 ** IERC20Metadata(pair.token1()).decimals() * reserve0 / reserve1/
             10 ** IERC20Metadata(pair.token0()).decimals();
-        console.log("pool price", p);
-        console.log("peg", peg);
-        console.log("delta", delta);
         return priceNotInBounds(uint192(p), peg, delta);
     }
 
@@ -66,8 +62,6 @@ contract UniswapV2FiatCollateral is UniswapV2AbstractCollateral {
 
         try chainlinkFeed.price_(oracleTimeout) returns (uint192 price0) {
             try chainlinkFeedSecondAsset.price_(oracleTimeout) returns (uint192 price1) {
-                console.log("price0", price0);
-                console.log("price1", price1);
                 uint192 peg = pricePerTarget();
                 uint192 delta = (peg * defaultThreshold) / FIX_ONE;
                 if (

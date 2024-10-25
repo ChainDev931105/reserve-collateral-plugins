@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity ^0.8.19;
 
-import "hardhat/console.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
@@ -226,10 +225,6 @@ contract UniswapV3Wrapper is IUniswapV3Wrapper, RewardSplitter, ReentrancyGuard 
         (uint160 sqrtRatioX96, int24 tick, , , , , ) = pool.slot0();
         (, , , , , int24 tickLower, int24 tickUpper, , , , , ) = nonfungiblePositionManager
             .positions(tokenId);
-        console.log("ticks");    
-        console.logInt(tickLower);
-        console.logInt(tickUpper);
-        console.logInt(tick);
         if (tick < tickLower) {
             // current tick is below the passed range; liquidity can only become in range by crossing from left to
             // right, when we'll need _more_ token0 (it's becoming more valuable) so user must provide it

@@ -6,7 +6,6 @@ pragma solidity ^0.8.19;
 import "../assets/AbstractCollateral.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
-import "hardhat/console.sol";
 
 //TODO sync in refresh in uniswapV2 and perhaps uniswapV3
 //TODO Unsiwap uses 112 bits floating points math for price accumulators

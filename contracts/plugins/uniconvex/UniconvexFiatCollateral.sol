@@ -2,7 +2,6 @@
 pragma solidity ^0.8.19;
 
 import "./UniconvexAbstractCollateral.sol";
-import "hardhat/console.sol";
 
 /**
     @title Convex Curve Fiat Collateral

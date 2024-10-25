@@ -6,7 +6,6 @@ pragma solidity ^0.8.19;
 import "./UniswapV2AbstractCollateral.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
-import "hardhat/console.sol";
 
 
 contract UniswapV2NonFiatCollateral is UniswapV2AbstractCollateral {
